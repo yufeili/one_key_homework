@@ -15,8 +15,8 @@ else
 			rm -f a.out
 		fi
 		echo $TEMP1  ##
-		enca -L zh_CN -x UTF-8  $TEMP 1.c
-		cat 1.c #显示源代码
+		enca -L zh_CN -x UTF-8  1.c  #转码为UTF-8编码
+		cat $TEMP > 1.c #显示源代码
 		gcc 1.c -lm -g -Wall -Wextra -o a.out
 		STATUS=$0
 		echo $STATUS 
@@ -35,8 +35,8 @@ else
 		if [ "$TEMP1" != "" ] ; then
 			rm -f a.out
 		fi
-		enca -L zh_CN -x UTF-8 $TEMP 1.cpp
-		cat 1.cpp
+		cat $TEMP > 1.cpp
+		enca -L zh_CN -x UTF-8 1.cpp #转码为UTF-8编码
 		if [ $(cat 1.cpp | grep main) = '' ];then #把void main 替换
 			echo "1"  ##
 		else
