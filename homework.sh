@@ -15,14 +15,15 @@ else
 			rm -f a.out
 		fi
 		echo $TEMP1  ##
-		enca -L zh_CN -x UTF-8  1.c  #转码为UTF-8编码
-		cat $TEMP > 1.c #显示源代码
-		gcc 1.c -lm -g -Wall -Wextra -o a.out
-		STATUS=$0
+		cat $TEMP > 1.c #复制源代码
+		enca -L zh_CN -x UTF-8 1.c #转码
+		cat 1.c  #显示源代码
+		gcc 1.c -lm -g -Wall -Wextra -o a.out #编译
+		STATUS=$0 
 		echo $STATUS 
-		chmod 700 a.out
-		./a.out
-		rm 1.c
+		chmod 700 a.out #修改权限
+		./a.out  #执行
+		rm 1.c 
 		rm $TEMP
 		exit 0
 	fi
@@ -42,7 +43,8 @@ else
 		else
 			echo "2"  ##有void main语句
 		fi
-		STATUS =$(g++ 1.cpp -lm -g -Wall -Wextra -o a.out)
+		cat 1.cpp #显示源代码
+		STATUS =$(g++ 1.cpp -lm -g -Wall -Wextra -o a.out) #编译
 		echo $STATUS
 		rm 1.cpp
 		exit 0
