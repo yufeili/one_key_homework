@@ -14,8 +14,8 @@ else
 		if [ "$TEMP1" != "" ];then #删除
 			rm -f a.out
 		fi
-		echo $TEMP1  ##
-		cat $TEMP > 1.c #复制源代码
+		echo "$TEMP"  ##
+		cat "$TEMP" > 1.c #复制源代码
 		enca -L zh_CN -x UTF-8 1.c #转码
 		cat 1.c  #显示源代码
 		gcc 1.c -lm -g -Wall -Wextra -o a.out #编译
@@ -24,7 +24,7 @@ else
 		chmod 700 a.out #修改权限
 		./a.out  #执行
 		rm 1.c 
-		rm $TEMP
+		rm  "$TEMP"
 		exit 0
 	fi
 	TEMP=$(ls | grep *.cpp) #文件中寻找.cpp文件
@@ -36,7 +36,7 @@ else
 		if [ "$TEMP1" != "" ] ; then
 			rm -f a.out
 		fi
-		cat $TEMP > 1.cpp
+		cat "$TEMP" > 1.cpp
 		enca -L zh_CN -x UTF-8 1.cpp #转码为UTF-8编码
 		if [ $(cat 1.cpp | grep main) = '' ];then #把void main 替换
 			echo "1"  ##
@@ -44,9 +44,11 @@ else
 			echo "2"  ##有void main语句
 		fi
 		cat 1.cpp #显示源代码
-		STATUS =$(g++ 1.cpp -lm -g -Wall -Wextra -o a.out) #编译
+		g++ 1.cpp -lm -g -Wall -Wextra -o a.out #编译
+		STATUS=$0
 		echo $STATUS
 		rm 1.cpp
+		rm "$TEMP"
 		exit 0
 		chmod 700 a.out
 		./a.out
